@@ -1,0 +1,10 @@
+#newest-players {
+    float: left;
+    border: 4px solid #eef;
+    border-radius: 15px;
+}
+#newest-games {
+    float: left;
+    border: 4px solid #eef;
+    border-radius: 15px;
+}

@@ -1,0 +1,11 @@
+.classpath
+.project
+.idea/
+.settings/
+bin/
+lib/
+out/
+target/
+
+persistence.xml
+security.properties

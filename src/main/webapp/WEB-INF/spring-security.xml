@@ -1,0 +1,44 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <http auto-config="true">
+        <intercept-url pattern="/edit" access="ROLE_USER" />
+        <intercept-url pattern="/game/create" access="ROLE_USER" />
+        <intercept-url pattern="/game/*/level/create" access="ROLE_USER" />
+        <intercept-url pattern="/game/*/level/create/submit" access="ROLE_USER" />
+
+        <!-- XXX fix ?error=true -->
+        <form-login
+                login-page="/login"
+                authentication-failure-url="/login?error=true"
+                default-target-url="/"/>
+
+        <logout
+                invalidate-session="true"
+                logout-success-url="/"
+                logout-url="/logout"/>
+    </http>
+
+    <!--<authentication-manager>-->
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--&lt;!&ndash; Reading this means that you have officially hacked me. This is also the password to my gmail and facebook (;_;) &ndash;&gt;-->
+                <!--<user slugName="test" password="123456" authorities="ROLE_USER" />-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="playerUserDetailsService">
+            <password-encoder ref="playerPasswordEncoder">
+                <salt-source ref="playerSaltSource"/>
+            </password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

@@ -1,0 +1,65 @@
+allt ligger under /api/
+() är frivilliga parametrar
+* är icke implementerat
+
+*/documentation						GET		gets a documentation
+/slugify							GET		slugifies the name			param: name
+
+/player/isfree						GET		checks if the name is free	param: name																			
+/player/list						GET 	view list of users			param: offset, (count)
+*/player/search						GET 	search (not specified)		param:
+/player/{name}						GET 	view user					param:
+/player/create						POST	create user					param: name, password, (mail), (description)					errors: 400
+/player/create/try					POST	try create					param: name, password, (mail), (description), (skip_auth)		errors: 400
+
+/player								PUT		update user					param: (mail), (description)
+/player/login						POST	login user					param: name, password(sha5*1000)								errors: 400, 404
+/player/login/try					POST	try login					param: name, password(sha5*1000)								errors: 400, 404
+*/player/logout						POST	logout user					param:
+*/player/logout/all					POST	logout user from all places	param:																				comment: lol this should include web
+
+*	/game							GET		view players games			param:
+*	/game/{name}					GET		view players game highscore	param:
+
+/game/{name}						GET 	view game
+/game/create						POST	create game					param: name, (description)										errors: 400, 404
+/game/create/try					POST	try create game				param: name, (description)										errors: 400, 404
+/game/{name}						PUT		update game					param: (description)
+*/game/{name}						DELETE	delete game					param:
+
+	/level/{name}/					GET		view level					param:
+	/level/create					POST	create level				param: name
+	/level/{name}/highscore			GET		view highscore				param:
+
+* NOTE: game/{name}/level/{name} can always be replaced by level/{id}. It's cheaper for the server lol!
+
+
+		/score/{id}					GET		view score
+/score/{id}							GET		view score
+		/score/						POST	add score					param: score
+		
+		
+---------------
+SITE NAVIGATION
+---------------
+
+/									home
+/register							register
+/login								login
+/edit								edit player						REQUIRES LOGIN
+
+*/player							players overview
+/player/{name}						view player
+/player/{id}						redirect to view player
+
+/game								games overview
+/game/{name}						view game
+/game/create						create game						REQUIRES LOGIN
+*/game/create/submit				submit created game				REQUIRES LOGIN
+
+*/game/{name}/level/						view all levels
+*/game/{name}/level/{name}					view level
+/game/{name}/level/create					create level			REQUIRES LOGIN
+*/game/{name}/level/create/submit			submit created level	REQUIRES LOGIN
+
+/score/{id}							view score

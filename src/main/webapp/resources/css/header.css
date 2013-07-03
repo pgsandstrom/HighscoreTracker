@@ -1,0 +1,39 @@
+
+
+#header {
+    background: #C529FB;
+    height: 120px
+}
+
+#header-content {
+    width: 960px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+#header-title {
+    float: left;
+}
+
+#header-control {
+    background: #EEC0FE;
+    right: 0;
+    height: 100%;
+    position: absolute;
+    border-bottom-right-radius: 10px;
+}
+
+#header-control-content {
+    display: inline-block;
+    padding: 0 5px 5px 5px;
+}
+
+#header-control-flarp {
+    height: 100%;
+    width: 10px;
+    display: inline-block;
+    border-bottom-right-radius: 10px;
+    background: #C529FB;
+}

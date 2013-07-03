@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsf/core"
+        >
+<body>
+<ui:composition>
+    <div id="all-player-highscores">
+        All highscores:
+        <ul>
+            <ui:repeat var="score" value="#{scoreApi.getAllPlayerHighscores(player.id, true)}" varStatus="status">
+
+                <ui:fragment rendered="#{score.firstScoreForGame}">
+                    <h3><a href="#{root}/game/#{score.level.game.slugName}">#{score.level.game.displayName}</a></h3>
+                </ui:fragment>
+                <li>
+                    <h4 class="inline-block">
+                        <a href="#{root}/game/#{score.level.game.slugName}/level/#{score.level.slugName}">#{score.level.displayName}</a>
+                    </h4>
+                    <a href="#{root}/score/#{score.id}">#{score.score}</a>
+                </li>
+            </ui:repeat>
+        </ul>
+    </div>
+</ui:composition>
+</body>
+</html>

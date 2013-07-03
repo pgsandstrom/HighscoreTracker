@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/tags"
+        >
+<h:head>
+
+</h:head>
+
+<h:body>
+<ui:composition>
+    <h:outputStylesheet name="css/header.css"/>
+    <!--<link type="text/css" rel="stylesheet" href="/resources/css/header.css" media="all"/>-->
+
+    <div id="header">
+
+
+        <div id="header-content">
+            <h1 id="header-title"><a href="#{root}/">HIGHSCORE TRACKER</a></h1>
+
+            <div id="header-control">
+                <div id="header-control-flarp">
+                </div>
+                <div id="header-control-content">
+                    <ui:insert name="session_control">default session control in header</ui:insert>
+                </div>
+
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+    </div>
+    <div id="menu">
+        <div id="menu-content">
+
+             <span><a href="#{root}/game">Games</a></span> <span><a href="#{root}/player">Players</a></span>
+
+            <ui:fragment rendered="#{sec:areAllGranted('ROLE_USER')}">
+                <span><a href="#{root}/player/#{playerJsfApi.playerSlugName}">Profile</a></span>
+            </ui:fragment>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+</ui:composition>
+</h:body>
+</html>

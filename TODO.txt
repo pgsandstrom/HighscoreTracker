@@ -1,0 +1,5 @@
+fixa profiles i maven, så de använder olika loggar etc
+fixa fler tester
+fixa selenium
+fixa google analytics
+fixa jenkins

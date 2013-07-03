@@ -1,0 +1,44 @@
+? means it is not implemented...
+
+Player (cascade delete games)
+	id
+	slug_name
+	display_name
+	mail
+	description
+	created (auto)
+	auth_token
+	dynamic_salt
+	
+Game (cascade delete levels)
+	id
+	slug_name
+	display_name
+	description
+	created (auto)
+	owner (fk)
+
+Level (cascade delete scores)
+	id
+	game_id (fk)
+	slug_name
+	display_name
+	created (auto)
+	
+Score
+	id
+	player_id (fk)
+	level_id (fk)
+	score
+	created (auto)
+	
+Round?
+	id
+	created
+	last_updated
+	finished
+	
+Round_Player_Map?
+	round_id
+	player_id
+	finish_state (winner, draw, loser)

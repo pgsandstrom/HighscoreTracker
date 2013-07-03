@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<h:body>
+    <ui:composition template="/template/page.xhtml">
+        <ui:define name="content">
+            <div id="create-game">
+                Create thy game!
+                <h:form id="create-game-form">
+                    name: <h:inputText type="text" name="name" id="name" value="#{gameBean.displayName}"/>
+                    <br/>
+                    description: <h:inputText type="text" name="description" id="description"
+                                              value="#{gameBean.description}"/>
+                    <br/>
+                    <h:commandButton id="submit-button" value="Create" action="#{webApi.createGame(gameBean)}"/>
+                </h:form>
+
+                <div id="create-game-error"></div>
+            </div>
+            <h:outputScript name="js/create-game.js"/>
+            <!--<script src="/resources/js/create-game.js" type="text/javascript"></script>-->
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

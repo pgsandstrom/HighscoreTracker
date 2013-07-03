@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<h:body>
+    <ui:composition template="/template/page.xhtml">
+        <ui:define name="content">
+            <h2 id="player-title">#{player.displayName}</h2>
+            <button id="send-message">Send message</button>
+            <div id="player-created">Member since #{player.createdFormatted}</div>
+
+            <div id="player-presentation">#{player.description}</div>
+
+            <ui:include src="/element/list_player_highscores.xhtml"/>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

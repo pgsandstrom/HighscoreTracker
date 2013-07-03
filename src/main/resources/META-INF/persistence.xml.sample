@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>se.persandstrom.highscoretracker.internal.player.Player</class>
+        <class>se.persandstrom.highscoretracker.internal.player.PlayerFull</class>
+        <class>se.persandstrom.highscoretracker.internal.game.Game</class>
+        <class>se.persandstrom.highscoretracker.internal.level.Level</class>
+        <class>se.persandstrom.highscoretracker.internal.score.Score</class>
+        <class>se.persandstrom.highscoretracker.internal.score.ScoreWithPlayer</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://INSERT_IP/highscore_tracker"/>
+            <property name="javax.persistence.jdbc.user" value="INSERT_USER"/>
+            <property name="javax.persistence.jdbc.password" value="INSERT_PASSWORD"/>
+            <property name="eclipselink.target-database" value="MySQL"/>
+        </properties>
+    </persistence-unit>
+</persistence>

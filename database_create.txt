@@ -1,0 +1,115 @@
+------
+Player
+------
+
+delimiter $$
+
+CREATE TABLE `Player` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `slug_name` varchar(45) NOT NULL,
+  `display_name` varchar(45) NOT NULL,
+  `mail` text,
+  `description` text,
+  `created` bigint(20) DEFAULT NULL,
+  `auth_token` varchar(128) NOT NULL,
+  `dynamic_salt` varchar(8) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug_name_UNIQUE` (`slug_name`),
+  UNIQUE KEY `display_name_UNIQUE` (`display_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8$$
+
+CREATE
+DEFINER=`sandstrom`@`%`
+TRIGGER `highscore_tracker`.`Player_set_created`
+BEFORE INSERT ON `highscore_tracker`.`Player`
+FOR EACH ROW
+BEGIN
+SET new.created = UNIX_TIMESTAMP();
+END
+$$
+
+------	
+Game
+------
+
+delimiter $$
+
+CREATE TABLE `Game` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `slug_name` varchar(45) NOT NULL,
+  `display_name` varchar(45) NOT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  `created` bigint(20) DEFAULT NULL,
+  `owner_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug_name_UNIQUE` (`slug_name`),
+  UNIQUE KEY `display_name_UNIQUE` (`display_name`),
+  KEY `owner_id_idx` (`owner_id`),
+  CONSTRAINT `owner_id` FOREIGN KEY (`owner_id`) REFERENCES `Player` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8$$
+
+CREATE
+DEFINER=`sandstrom`@`%`
+TRIGGER `highscore_tracker`.`Game_set_created`
+BEFORE INSERT ON `highscore_tracker`.`Game`
+FOR EACH ROW
+BEGIN
+SET new.created = UNIX_TIMESTAMP();
+END
+$$
+
+------
+Level
+------
+
+delimiter $$
+
+CREATE TABLE `Level` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `game_id` bigint(20) DEFAULT NULL,
+  `slug_name` varchar(45) DEFAULT NULL,
+  `display_name` varchar(45) DEFAULT NULL,
+  `created` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `game_id_idx` (`game_id`),
+  CONSTRAINT `game_id` FOREIGN KEY (`game_id`) REFERENCES `Game` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8$$
+
+CREATE
+DEFINER=`sandstrom`@`%`
+TRIGGER `highscore_tracker`.`Level_set_created`
+BEFORE INSERT ON `highscore_tracker`.`Level`
+FOR EACH ROW
+BEGIN
+SET new.created = UNIX_TIMESTAMP();
+END
+$$
+
+------
+Score
+------
+
+delimiter $$
+
+CREATE TABLE `Score` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `player_id` bigint(20) DEFAULT NULL,
+  `level_id` bigint(20) DEFAULT NULL,
+  `score` bigint(20) DEFAULT NULL,
+  `created` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `player_id_idx` (`player_id`),
+  KEY `level_id_idx` (`level_id`),
+  CONSTRAINT `level_id` FOREIGN KEY (`level_id`) REFERENCES `Level` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `Player` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8$$
+
+CREATE
+DEFINER=`sandstrom`@`%`
+TRIGGER `highscore_tracker`.`Score_set_created`
+BEFORE INSERT ON `highscore_tracker`.`Score`
+FOR EACH ROW
+BEGIN
+SET new.created = UNIX_TIMESTAMP();
+END
+$$

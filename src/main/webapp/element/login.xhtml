@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+<h:body>
+<ui:composition>
+    Log in for awesome features!
+    <!--#{request.contextPath}-->
+    <!--#{facesContext.externalContext.request.contextPath}-->
+    <!--#{facesContext.externalContext.requestContextPath}-->
+    <form id="login-form"
+          action="#{root}/j_spring_security_check"
+          method="post">
+        Username: <input type="text" name="j_username" id="j_username"/>
+        <br/>
+        <!-- use two password fields so the user does not see us inserting the hashed password in his field -->
+        Password: <input type="password" name="password-visible" id="password-visible"/>
+        <input type="hidden" value="/" name="j_password" id="j_password"/>
+        <br/>
+        <input
+                id="submit-login"
+                name="submit-login"
+                type="submit"
+                value="Login"/>
+    </form>
+    <div id="login-error"></div>
+    <a href="#{root}/register" class="small">Don't have an account? LOL! Get one!</a>
+    <h:outputScript name="js/sha512.js"/>
+    <h:outputScript name="js/login.js"/>
+    <!--<script src="/resources/js/login.js" type="text/javascript"></script>-->
+</ui:composition>
+
+</h:body>
+</html>

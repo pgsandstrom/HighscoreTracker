@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<h:body>
+
+    <ui:composition template="/template/page.xhtml">
+        <ui:define name="content">
+
+            <h1 class="margin-bottom-small">#{gameBean.displayName}</h1>
+
+            <span class="small margin-top-small"><a href="#{root}/player/#{owner.slugName}">view owner</a>
+            <ui:fragment rendered="#{playerJsfApi.isPlayerGameOwner(gameBean.ownerId)}"> <a
+                    href="#{root}/game/#{gameBean.slugName}/level/create">create level</a></ui:fragment></span>
+
+            <h2 class="margin-bottom-small">Description</h2>
+
+            <p class="margin-top-small">#{gameBean.description}</p>
+
+            <div id="levels" class="border">
+                Levels:
+
+                <ul>
+                    <ui:repeat var="level" value="#{levelApi.getGameLevelsByName(gameBean.slugName)}"
+                               varStatus="status">
+                        <li><a href="#{root}/game/#{gameBean.slugName}/level/#{level.slugName}">#{level.displayName}</a></li>
+                    </ui:repeat>
+                </ul>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

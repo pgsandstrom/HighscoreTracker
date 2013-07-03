@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+<body>
+<ui:composition>
+    <span>Account: #{playerJsfApi.playerDisplayName}</span>
+    (<a id="link-edit-profile" href="#{root}/edit">edit</a>)
+    <br/>
+    <a id="link-logout" href="#{root}/logout">Log out</a>
+    <br/>
+    <a id="link-create-game" href="#{root}/game/create">create game</a>
+</ui:composition>
+</body>
+</html>
