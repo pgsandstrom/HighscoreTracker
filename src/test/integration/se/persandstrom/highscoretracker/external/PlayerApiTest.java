@@ -9,11 +9,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import se.persandstrom.highscoretracker.exception.ForbiddenNameException;
 import se.persandstrom.highscoretracker.exception.NotFoundException;
+import se.persandstrom.highscoretracker.internal.authentication.Authentication;
 import se.persandstrom.highscoretracker.internal.player.Player;
 import se.persandstrom.highscoretracker.internal.player.PlayerApi;
 import se.persandstrom.highscoretracker.internal.player.PlayerDb;
 import se.persandstrom.highscoretracker.internal.player.PlayerDbMocker;
-import se.persandstrom.highscoretracker.internal.authentication.Authentication;
 
 import java.io.IOException;
 import java.util.List;

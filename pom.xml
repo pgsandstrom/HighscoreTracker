@@ -133,10 +133,10 @@
 
         <!-- This dependency has an old version of javax.servlet.http.Cookie and some other stuff, making maven fail-->
         <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>servlet-api</artifactId>-->
-            <!--<version>2.5</version>-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>javax.servlet</groupId>-->
+        <!--<artifactId>servlet-api</artifactId>-->
+        <!--<version>2.5</version>-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
         <!-- Lets use this instead of the aboev thingy-->
@@ -224,6 +224,13 @@
         </dependency>
 
         <!-- test -->
+        <!--<dependency>-->
+        <!--<groupId>org.seleniumhq.selenium</groupId>-->
+        <!--<artifactId>selenium-java</artifactId>-->
+        <!--<version>2.33.0</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -235,6 +242,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- for hashing -->
@@ -315,36 +323,77 @@
             </properties>
         </profile>
 
+        <!-- TODO: Currently this profile is a hack. Run only the "validate" phase while the server is running on
+        localhost:8080 to run the selenium tests. We need to fix so the "production" profile runs this correctly as an
+        integration test without disturbing the other integration tests -->
+        <!-- TODO test if the selenium server shuts down correctly now -->
+        <profile>
+            <id>selenium</id>
+            <properties>
+                <profile.name>selenium</profile.name>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>selenium-maven-plugin</artifactId>
+                        <version>2.3</version>
+                        <executions>
+                            <execution>
+                                <id>run</id>
+                                <phase>validate</phase>
+                                <!--<phase>pre-integration-test</phase>-->
+                                <goals>
+                                    <goal>selenese</goal>
+                                </goals>
+                                <configuration>
+                                    <browser>*googlechrome</browser>
+                                    <results>src/test/resources/result.html</results>
+                                    <startURL>http://localhost:8080/</startURL>
+                                    <suite>src/test/resources/TestSuite</suite>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>stop</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop-server</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
 
         <!-- This profile here copies and deletes files and stuff: -->
         <!--<profile>-->
-            <!--<id>filemover</id>-->
-            <!--<build>-->
-                <!--<plugins>-->
-                    <!--<plugin>-->
-                        <!--<artifactId>maven-antrun-plugin</artifactId>-->
-                        <!--<executions>-->
-                            <!--<execution>-->
-                                <!--<phase>test</phase>-->
-                                <!--<goals>-->
-                                    <!--<goal>run</goal>-->
-                                <!--</goals>-->
-                                <!--<configuration>-->
-                                    <!--<tasks>-->
-                                        <!--<delete file="${project.build.directory}/classes/env.properties" />-->
-                                        <!--<copy file="src/main/resources/test.properties"-->
-                                              <!--tofile="${project.build.directory}/classes/env.properties" />-->
-                                        <!--<delete file="${project.build.directory}/classes/test.properties" />-->
-                                        <!--<delete file="${project.build.directory}/classes/prod.properties" />-->
-
-                                    <!--</tasks>-->
-                                <!--</configuration>-->
-                            <!--</execution>-->
-                        <!--</executions>-->
-                    <!--</plugin>-->
-                <!--</plugins>-->
-            <!--</build>-->
+        <!--<id>filemover</id>-->
+        <!--<build>-->
+        <!--<plugins>-->
+        <!--<plugin>-->
+        <!--<artifactId>maven-antrun-plugin</artifactId>-->
+        <!--<executions>-->
+        <!--<execution>-->
+        <!--<phase>test</phase>-->
+        <!--<goals>-->
+        <!--<goal>run</goal>-->
+        <!--</goals>-->
+        <!--<configuration>-->
+        <!--<tasks>-->
+        <!--<delete file="${project.build.directory}/classes/env.properties" />-->
+        <!--<copy file="src/main/resources/test.properties"-->
+        <!--tofile="${project.build.directory}/classes/env.properties" />-->
+        <!--<delete file="${project.build.directory}/classes/test.properties" />-->
+        <!--<delete file="${project.build.directory}/classes/prod.properties" />-->
+        <!--</tasks>-->
+        <!--</configuration>-->
+        <!--</execution>-->
+        <!--</executions>-->
+        <!--</plugin>-->
+        <!--</plugins>-->
+        <!--</build>-->
         <!--</profile>-->
 
     </profiles>

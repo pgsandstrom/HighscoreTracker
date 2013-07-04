@@ -12,12 +12,9 @@ import se.persandstrom.highscoretracker.exception.AlreadyExistException;
 import se.persandstrom.highscoretracker.exception.ForbiddenNameException;
 import se.persandstrom.highscoretracker.exception.IllegalPasswordException;
 import se.persandstrom.highscoretracker.exception.NotFoundException;
-import se.persandstrom.highscoretracker.internal.player.Player;
-import se.persandstrom.highscoretracker.internal.player.PlayerApi;
 
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:integrationtest-context.xml"})
