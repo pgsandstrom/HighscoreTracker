@@ -4,7 +4,6 @@ package se.persandstrom.highscoretracker.internal.level;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import se.persandstrom.highscoretracker.internal.DatabaseSingleton;
-import se.persandstrom.highscoretracker.internal.common.AbstractDb;
 import se.persandstrom.highscoretracker.internal.player.Player;
 import se.persandstrom.highscoretracker.internal.simple.SimpleDb;
 
@@ -17,7 +16,7 @@ import java.util.List;
 
 @Component
 @Scope("application")
-public class LevelDb extends AbstractDb implements Serializable {
+public class LevelDb implements Serializable {
 
     @Inject
     private DatabaseSingleton database;
@@ -44,7 +43,7 @@ public class LevelDb extends AbstractDb implements Serializable {
                     + " l.slugName = :levelSlugName");
             q.setParameter("gameId", gameId);
             q.setParameter("levelSlugName", levelSlugName);
-            Level level = (Level) getSingleResult(q);
+            Level level = (Level) simpleDb.getSingleResult(q);
             return level;
         } finally {
             em.close();
@@ -59,7 +58,7 @@ public class LevelDb extends AbstractDb implements Serializable {
 
             q.setParameter("gameSlugName", gameSlugName);
             q.setParameter("levelSlugName", levelSlugName);
-            Level level = (Level) getSingleResult(q);
+            Level level = (Level) simpleDb.getSingleResult(q);
             return level;
         } finally {
             em.close();

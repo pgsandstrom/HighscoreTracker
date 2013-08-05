@@ -326,7 +326,6 @@
         <!-- TODO: Currently this profile is a hack. Run only the "validate" phase while the server is running on
         localhost:8080 to run the selenium tests. We need to fix so the "production" profile runs this correctly as an
         integration test without disturbing the other integration tests -->
-        <!-- TODO test if the selenium server shuts down correctly now -->
         <profile>
             <id>selenium</id>
             <properties>

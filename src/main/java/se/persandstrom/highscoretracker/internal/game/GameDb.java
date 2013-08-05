@@ -8,19 +8,16 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import se.persandstrom.highscoretracker.exception.GameNotFoundException;
 import se.persandstrom.highscoretracker.internal.DatabaseSingleton;
-import se.persandstrom.highscoretracker.internal.common.AbstractDb;
-import se.persandstrom.highscoretracker.internal.player.Player;
 import se.persandstrom.highscoretracker.internal.simple.SimpleDb;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
 
 @Component
 @Scope("application")
-public class GameDb extends AbstractDb implements Serializable {
+public class GameDb implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(GameDb.class);
 

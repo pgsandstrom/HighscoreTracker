@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import se.persandstrom.highscoretracker.exception.NotFoundException;
 import se.persandstrom.highscoretracker.exception.PlayerNotFoundException;
 import se.persandstrom.highscoretracker.internal.DatabaseSingleton;
-import se.persandstrom.highscoretracker.internal.common.AbstractDb;
 import se.persandstrom.highscoretracker.internal.simple.SimpleDb;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +19,7 @@ import java.util.List;
 
 @Component
 @Scope("application")
-public class PlayerDb extends AbstractDb implements Serializable {
+public class PlayerDb implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(PlayerDb.class);
 
@@ -76,6 +75,10 @@ public class PlayerDb extends AbstractDb implements Serializable {
         return simpleDb.getByDisplayName(displayName);
     }
 
+    public List<Player> getList() {
+        return simpleDb.getList();
+    }
+
     public List<Player> getList(int offset, int count) {
         return simpleDb.getList(offset, count);
     }
@@ -90,7 +93,7 @@ public class PlayerDb extends AbstractDb implements Serializable {
         try {
             Query q = em.createQuery("select t from PlayerFull t WHERE t.slugName = :slugName");
             q.setParameter("slugName", slugName);
-            return (PlayerFull) getSingleResult(q);
+            return (PlayerFull) simpleDb.getSingleResult(q);
         } finally {
             em.close();
         }
@@ -101,7 +104,7 @@ public class PlayerDb extends AbstractDb implements Serializable {
         try {
             Query q = em.createQuery("select t from PlayerFull t WHERE t.displayName = :displayName");
             q.setParameter("displayName", displayName);
-            return (PlayerFull) getSingleResult(q);
+            return (PlayerFull) simpleDb.getSingleResult(q);
         } finally {
             em.close();
         }

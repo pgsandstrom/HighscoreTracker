@@ -10,6 +10,7 @@ import se.persandstrom.highscoretracker.internal.authentication.AuthData;
 import se.persandstrom.highscoretracker.internal.authentication.Authentication;
 import se.persandstrom.highscoretracker.internal.authentication.SessionCookie;
 import se.persandstrom.highscoretracker.internal.authentication.SessionData;
+import se.persandstrom.highscoretracker.internal.game.Game;
 import se.persandstrom.highscoretracker.internal.simple.SimpleDb;
 
 import javax.servlet.http.Cookie;
@@ -68,6 +69,10 @@ public class PlayerApi implements Serializable {
             throw new PlayerNotFoundException(slugName);
         }
         return player;
+    }
+
+    public List<Player> getPlayerList() {
+        return playerDb.getList();
     }
 
     public List<Player> getPlayerList(int offset, int count) {

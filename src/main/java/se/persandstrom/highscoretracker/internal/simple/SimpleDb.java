@@ -3,13 +3,13 @@ package se.persandstrom.highscoretracker.internal.simple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.persandstrom.highscoretracker.internal.DatabaseSingleton;
-import se.persandstrom.highscoretracker.internal.common.AbstractDb;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
-public class SimpleDb<T> extends AbstractDb {
+public class SimpleDb<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleDb.class);
 
@@ -21,6 +21,14 @@ public class SimpleDb<T> extends AbstractDb {
         this.database = database;
         this.type = type;
         this.tableName = type.getName();
+    }
+
+    public Object getSingleResult(Query q) {
+        try {
+            return q.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     public List<T> getNewest() {

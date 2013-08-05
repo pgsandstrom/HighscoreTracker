@@ -84,6 +84,11 @@ public class RedirectHtml {
         return "edit";
     }
 
+    @RequestMapping(value = "/player", method = RequestMethod.GET)
+    public String viewPlayersAll(Model model) {
+        return "view-players-all";
+    }
+
     @RequestMapping(value = "/player/{name}", method = RequestMethod.GET)
     public String viewPlayer(HttpServletResponse response, Model model, @PathVariable("name") String slugName) throws
             NotFoundException {

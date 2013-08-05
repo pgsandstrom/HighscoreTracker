@@ -4,8 +4,6 @@ package se.persandstrom.highscoretracker.internal.score;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import se.persandstrom.highscoretracker.internal.DatabaseSingleton;
-import se.persandstrom.highscoretracker.internal.common.AbstractDb;
-import se.persandstrom.highscoretracker.internal.player.Player;
 import se.persandstrom.highscoretracker.internal.simple.SimpleDb;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +15,7 @@ import java.util.List;
 
 @Component
 @Scope("application")
-public class ScoreDb extends AbstractDb implements Serializable {
+public class ScoreDb implements Serializable {
 
     @Inject
     DatabaseSingleton database;
