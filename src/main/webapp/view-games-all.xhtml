@@ -16,7 +16,7 @@
             <h1 class="margin-bottom-small">GAMEZZzzzzz</h1>
 
             <span class="small margin-top-small">u know</span>
-            <h:form prependId="false">
+            <h:form prependId="false" class="primefaces-fontfix">
 
                 <!--http://www.primefaces.org/showcase/ui/datatablePagination.jsf-->
                 <p:dataTable id="dataTable" var="game" value="#{gameApi.gameList}"
@@ -46,7 +46,7 @@
                         <f:facet name="header">
                             <h:outputText value="Created"/>
                         </f:facet>
-                        <h:outputText value="#{game.created}"/>
+                        <h:outputText value="#{game.createdFormatted}"/>
                     </p:column>
                 </p:dataTable>
 

@@ -101,6 +101,12 @@
         <param-value>/WEB-INF/springsecurity.taglib.xml</param-value>
     </context-param>
 
+    <!-- primefaces theme-->
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>flick</param-value>
+    </context-param>
+
     <error-page>
         <location>/error</location>
     </error-page>

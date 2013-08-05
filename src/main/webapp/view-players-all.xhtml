@@ -16,7 +16,8 @@
             <h1 class="margin-bottom-small">Players</h1>
 
             <span class="small margin-top-small">Here is all the players in the world:</span>
-            <h:form prependId="false">
+
+            <h:form prependId="false" class="primefaces-fontfix">
 
                 <!--http://www.primefaces.org/showcase/ui/datatablePagination.jsf-->
                 <p:dataTable id="dataTable" var="player" value="#{playerApi.getPlayerList()}"
@@ -46,7 +47,7 @@
                         <f:facet name="header">
                             <h:outputText value="Created"/>
                         </f:facet>
-                        <h:outputText value="#{player.created}"/>
+                        <h:outputText value="#{player.createdFormatted}"/>
                     </p:column>
                 </p:dataTable>
 

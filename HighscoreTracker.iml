@@ -159,6 +159,7 @@
     <orderEntry type="library" name="Maven: javax.el:el-api:2.2" level="project" />
     <orderEntry type="library" name="Maven: com.sun.el:el-ri:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:3.5" level="project" />
+    <orderEntry type="library" name="Maven: org.primefaces.themes:flick:1.0.9" level="project" />
   </component>
 </module>
 

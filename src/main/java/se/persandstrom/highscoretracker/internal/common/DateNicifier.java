@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class DateNicifier {
 
-    private static SimpleDateFormat dateformatYYYYMMDD = new SimpleDateFormat("MM dd yyyy");
+    private static SimpleDateFormat dateformatYYYYMMDD = new SimpleDateFormat("dd MMM -yy");
 
     public static String nicify(long unixTimeSeconds) {
         Date date = new Date(unixTimeSeconds * 1000);
